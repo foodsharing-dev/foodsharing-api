@@ -1,0 +1,37 @@
+# To get started with security, check out the documentation:
+# http://symfony.com/doc/current/security.html
+security:
+
+    # http://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
+    providers:
+        doctrine:
+            entity:
+                class: AppBundle:Foodsaver
+                property: email
+        in_memory:
+            memory: ~
+
+    encoders:
+        AppBundle\Entity\Foodsaver:
+            id: app.salted_md5_encoder
+
+    firewalls:
+        # disables authentication for assets and the profiler, adapt it according to your needs
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            anonymous: ~
+
+            guard:
+                authenticators:
+                    - app.foodsharing_authenticator
+
+            logout:
+                path: /api/v1/logout
+                success_handler: app.logout_success_handler
+
+
+    access_control:
+        - { path: ^/api/v1/, roles: ROLE_USER }
