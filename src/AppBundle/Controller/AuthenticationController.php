@@ -3,7 +3,10 @@ namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\View;
+use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class AuthenticationController extends FOSRestController
 {
@@ -16,12 +19,13 @@ class AuthenticationController extends FOSRestController
      *      {"name"="password", "dataType"="string", "required"=true, "description"="password"}
      *  }
      * )
+     * @View(statusCode=200, serializerGroups={"own_user"})
      * @Post("/api/v1/login")
      */
-    public function loginAction()
+    public function loginAction(UserInterface $user = null)
     {
         // actual login is handle with Guard and FoodsharingAuthenticator
-        return array('message' => 'You are logged in!');
+        return ['user' => $user];
     }
 
     /**

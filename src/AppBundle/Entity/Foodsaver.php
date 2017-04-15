@@ -3,15 +3,21 @@
 namespace AppBundle\Entity;
 
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
+use JMS\Serializer\Annotation\Groups;
+use JMS\Serializer\Annotation\Expose;
+use JMS\Serializer\Annotation\ExclusionPolicy;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ExclusionPolicy("all")
  * @ORM\Entity
  * @ORM\Table(name="fs_foodsaver")
  */
 class Foodsaver implements AdvancedUserInterface
 {
     /**
+     * @Groups({"own_user", "profile"})
+     * @Expose
      * @ORM\Column(type="integer", options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -29,6 +35,8 @@ class Foodsaver implements AdvancedUserInterface
     private $role;
 
     /**
+     * @Groups({"own_user", "profile"})
+     * @Expose
      * @ORM\Column(type="string", length=50)
      */
     private $photo;
@@ -44,11 +52,15 @@ class Foodsaver implements AdvancedUserInterface
     private $passwd;
 
     /**
+     * @Groups({"own_user", "profile"})
+     * @Expose
      * @ORM\Column(type="string", length=120, name="`name`")
      */
     private $firstName;
 
     /**
+     * @Groups({"own_user"})
+     * @Expose
      * @ORM\Column(type="string", length=120, name="nachname")
      */
     private $lastName;
@@ -92,7 +104,7 @@ class Foodsaver implements AdvancedUserInterface
     {
         return $this->active;
     }
-    
+
     /**
      * Get id
      *
