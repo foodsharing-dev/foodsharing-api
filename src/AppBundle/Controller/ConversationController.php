@@ -19,6 +19,8 @@ class ConversationController extends FOSRestController
      * List all conversations the logged in user is active in.
      * Conversations will be ordered (conversation with most recent message first) as well as
      * limited.
+     *
+     * Take care: Message body has htmlentities applied to it!
      * @ApiDoc()
      * @View(statusCode=200, serializerGroups={"profile", "messageDetail", "conversationList"})
      * @Get("/api/v1/conversations")
@@ -33,6 +35,7 @@ class ConversationController extends FOSRestController
     /**
      * Get details on a conversation.
      *
+     * Take care: Message body has htmlentities applied to it!
      * @ApiDoc()
      * @Get("/api/v1/conversation/{id}")
      * @Security("conversation.isMember(user)")
