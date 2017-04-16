@@ -22,7 +22,7 @@ class TakenPickup
     /**
      * @Groups({"pickupDetail"})
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Store", fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="Store", fetch="EAGER")
      * @ORM\JoinColumn(name="betrieb_id", referencedColumnName="id", nullable=false)
      */
     private $store;

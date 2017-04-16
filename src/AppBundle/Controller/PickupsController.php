@@ -25,4 +25,20 @@ class PickupsController extends FOSRestController
         $pickups = $repository->findNextForUserOrderedByDate($user->getId());
         return ['pickups' => $pickups];
     }
+
+    /**
+     * Gets a single pickup detail.
+     * The pickup is identified by store and date, what actually means that the identifier may change when the date is moved.
+     * Currently, this does only add information about taken pickup slots.
+     *
+     * @ApiDoc()
+     * @View(statusCode=200, serializerGroups={"profile", "userProfileStore", "pickupDetail", "storeDetail"}))
+     * @Get("/api/v1/pickups/{store}:{at}")
+     */
+    public function getAction($store, \DateTime $at, UserInterface $user = null)
+    {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:TakenPickup');
+        $pickup = $repository->getPickupDetails($store, $at);
+        return ['pickup' => $pickup];
+    }
 }

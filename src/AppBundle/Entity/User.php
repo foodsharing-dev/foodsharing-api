@@ -66,11 +66,15 @@ class User implements AdvancedUserInterface
     private $lastName;
 
     /**
+     * @Expose
+     * @Groups({"userProfileStore"})
      * @ORM\Column(type="string", length=30, name="telefon")
      */
     private $phone;
 
     /**
+     * @Expose
+     * @Groups({"userProfileStore"})
      * @ORM\Column(type="string", length=50, name="handy")
      */
     private $mobile;
