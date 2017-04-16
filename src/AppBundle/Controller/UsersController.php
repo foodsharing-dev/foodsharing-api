@@ -8,7 +8,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use AppBundle\Entity\User;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class UserController extends FOSRestController
+class UsersController extends FOSRestController
 {
     /**
      * Show details on a user
