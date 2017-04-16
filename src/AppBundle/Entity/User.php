@@ -13,10 +13,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="fs_foodsaver")
  */
-class Foodsaver implements AdvancedUserInterface
+class User implements AdvancedUserInterface
 {
     /**
-     * @Groups({"own_user", "profile"})
+     * @Groups({"ownUser", "profile", "userId"})
      * @Expose
      * @ORM\Column(type="integer", options={"unsigned":true})
      * @ORM\Id
@@ -35,7 +35,7 @@ class Foodsaver implements AdvancedUserInterface
     private $role;
 
     /**
-     * @Groups({"own_user", "profile"})
+     * @Groups({"ownUser", "profile"})
      * @Expose
      * @ORM\Column(type="string", length=50)
      */
@@ -52,14 +52,14 @@ class Foodsaver implements AdvancedUserInterface
     private $passwd;
 
     /**
-     * @Groups({"own_user", "profile"})
+     * @Groups({"ownUser", "profile"})
      * @Expose
      * @ORM\Column(type="string", length=120, name="`name`")
      */
     private $firstName;
 
     /**
-     * @Groups({"own_user"})
+     * @Groups({"ownUser"})
      * @Expose
      * @ORM\Column(type="string", length=120, name="nachname")
      */
@@ -84,6 +84,11 @@ class Foodsaver implements AdvancedUserInterface
      * @ORM\Column(type="datetime")
      */
     private $lastLogin;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="Conversation", mappedBy="members")
+     */
+    private $conversations;
 
     public function isAccountNonExpired()
     {
@@ -120,7 +125,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param boolean $verified
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setVerified($verified)
     {
@@ -144,7 +149,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param integer $role
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setRole($role)
     {
@@ -178,7 +183,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param string $photo
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setPhoto($photo)
     {
@@ -202,7 +207,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param string $email
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setEmail($email)
     {
@@ -226,7 +231,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param string $passwd
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setPasswd($passwd)
     {
@@ -273,7 +278,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param string $firstName
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setFirstName($firstName)
     {
@@ -297,7 +302,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param string $lastName
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setLastName($lastName)
     {
@@ -321,7 +326,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param string $phone
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setPhone($phone)
     {
@@ -345,7 +350,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param string $mobile
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setMobile($mobile)
     {
@@ -369,7 +374,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param boolean $active
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setActive($active)
     {
@@ -393,7 +398,7 @@ class Foodsaver implements AdvancedUserInterface
      *
      * @param \DateTime $lastLogin
      *
-     * @return Foodsaver
+     * @return User
      */
     public function setLastLogin($lastLogin)
     {
@@ -410,5 +415,46 @@ class Foodsaver implements AdvancedUserInterface
     public function getLastLogin()
     {
         return $this->lastLogin;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->conversations = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add conversation
+     *
+     * @param \AppBundle\Entity\Conversation $conversation
+     *
+     * @return User
+     */
+    public function addConversation(\AppBundle\Entity\Conversation $conversation)
+    {
+        $this->conversations[] = $conversation;
+
+        return $this;
+    }
+
+    /**
+     * Remove conversation
+     *
+     * @param \AppBundle\Entity\Conversation $conversation
+     */
+    public function removeConversation(\AppBundle\Entity\Conversation $conversation)
+    {
+        $this->conversations->removeElement($conversation);
+    }
+
+    /**
+     * Get conversations
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getConversations()
+    {
+        return $this->conversations;
     }
 }

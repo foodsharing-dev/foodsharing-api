@@ -19,7 +19,7 @@ class AuthenticationController extends FOSRestController
      *      {"name"="password", "dataType"="string", "required"=true, "description"="password"}
      *  }
      * )
-     * @View(statusCode=200, serializerGroups={"own_user"})
+     * @View(statusCode=200, serializerGroups={"ownUser"})
      * @Post("/api/v1/login")
      */
     public function loginAction(UserInterface $user = null)

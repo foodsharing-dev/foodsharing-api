@@ -6,14 +6,14 @@ security:
     providers:
         doctrine:
             entity:
-                class: AppBundle:Foodsaver
+                class: AppBundle:User
                 property: email
         in_memory:
             memory: ~
 
-    encoders:
-        AppBundle\Entity\Foodsaver:
-            id: app.salted_md5_encoder
+    #encoders:
+    #    AppBundle\Entity\User:
+    #        id: app.salted_md5_encoder
 
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
