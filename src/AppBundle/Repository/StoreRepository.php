@@ -2,6 +2,8 @@
 
 namespace AppBundle\Repository;
 
+use AppBundle\Entity\StoreTeam;
+
 /**
  * StoreRepository
  *
@@ -10,4 +12,19 @@ namespace AppBundle\Repository;
  */
 class StoreRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findAllForUserOrderedByName($userId)
+    {
+        return $this->getEntityManager()
+        ->createQueryBuilder()
+        ->select('s')
+        ->from('AppBundle:StoreTeam', 'st')
+        ->leftJoin('AppBundle:Store', 's')
+        ->where('st.status != :not_status')
+        ->andWhere('st.user = :user_id')
+        ->orderBy('s.name', 'ASC')
+        ->setParameter('user_id', $userId)
+        ->setParameter('not_status', StoreTeam::STATUS_REQUESTED)
+        ->getQuery()
+        ->getResult();
+    }
 }

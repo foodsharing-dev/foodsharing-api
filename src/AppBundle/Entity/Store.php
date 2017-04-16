@@ -11,8 +11,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Store
 {
+    const STATUS_NO_CONTACT = 1;
+    const STATUS_NEGOTIATING = 2;
+    const STATUS_RUNNING = 3;
+    const STATUS_DECLINED = 4;
+    const STATUS_THIRD_PARTY_COOPERATION = 5;
+    const STATUS_CHARITY_NO_WASTE = 6;
+
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="integer", options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -20,47 +27,65 @@ class Store
     private $id;
 
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeDetail"})
      * @ORM\Column(type="string", length=5, name="plz")
      */
     private $zip;
 
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="string", length=50, name="stadt")
      */
     private $city;
 
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="string", length=120, name="`name")
      */
     private $name;
 
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeDetail"})
      * @ORM\Column(type="string", length=120, name="str")
      */
     private $street;
 
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeDetail"})
      * @ORM\Column(type="string", length=20, name="hsnr")
      */
     private $streetNumber;
 
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeDetail"})
      * @ORM\Column(type="text", name="besonderheiten")
      */
     private $notes;
 
     /**
-     * @Groups({"storeDetails"})
+     * @Groups({"storeDetail"})
+     * @ORM\Column(type="text", name="public_info")
+     */
+    private $notesPublic;
+
+    /**
+     * @Groups({"storeDetail"})
      * @ORM\ManyToOne(targetEntity="Conversation", fetch="LAZY")
      * @ORM\JoinColumn(name="team_conversation_id", referencedColumnName="id", nullable=true)
      */
     private $teamConversation;
+
+    /**
+     * @Groups({"storeDetail"})
+     * @ORM\OneToMany(targetEntity="StoreTeam", mappedBy="store")
+     */
+    private $team;
+
+    /**
+     * Groups({"storeList", "storeDetail"})
+     * @ORM\Column(type="integer", name="betrieb_status_id")
+     */
+    private $status;
 
     /**
      * Get id
@@ -238,5 +263,46 @@ class Store
     public function getTeamConversation()
     {
         return $this->teamConversation;
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->team = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add team
+     *
+     * @param \AppBundle\Entity\StoreTeam $team
+     *
+     * @return Store
+     */
+    public function addTeam(\AppBundle\Entity\StoreTeam $team)
+    {
+        $this->team[] = $team;
+
+        return $this;
+    }
+
+    /**
+     * Remove team
+     *
+     * @param \AppBundle\Entity\StoreTeam $team
+     */
+    public function removeTeam(\AppBundle\Entity\StoreTeam $team)
+    {
+        $this->team->removeElement($team);
+    }
+
+    /**
+     * Get team
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTeam()
+    {
+        return $this->team;
     }
 }

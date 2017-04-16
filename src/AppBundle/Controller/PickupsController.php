@@ -16,7 +16,7 @@ class PickupsController extends FOSRestController
      * Pickups will be ordered by date, first first, starting with a pickup in the short past.
      *
      * @ApiDoc()
-     * @View(statusCode=200, serializerGroups={"userId", "pickupDetails", "storeDetails", "conversationList"})
+     * @View(statusCode=200, serializerGroups={"userId", "pickupDetail", "storeDetail", "conversationList"})
      * @Get("/api/v1/pickups/next")
      */
     public function listNextAction(UserInterface $user = null)

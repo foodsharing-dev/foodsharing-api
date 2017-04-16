@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class TakenPickup
 {
     /**
-     * @Groups({"pickupDetails"})
+     * @Groups({"pickupDetail"})
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="User", fetch="LAZY")
      * @ORM\JoinColumn(name="foodsaver_id", referencedColumnName="id", nullable=false)
@@ -20,7 +20,7 @@ class TakenPickup
     private $user;
 
     /**
-     * @Groups({"pickupDetails"})
+     * @Groups({"pickupDetail"})
      * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Store", fetch="LAZY")
      * @ORM\JoinColumn(name="betrieb_id", referencedColumnName="id", nullable=false)
@@ -28,14 +28,14 @@ class TakenPickup
     private $store;
 
     /**
-     * @Groups({"pickupDetails"})
+     * @Groups({"pickupDetail"})
      * @ORM\Id
      * @ORM\Column(type="datetimekey", name="`date``", nullable=false)
      */
     private $at;
 
     /**
-     * @Groups({"pickupDetails"})
+     * @Groups({"pickupDetail"})
      * @ORM\Column(type="boolean")
      */
     private $confirmed;
