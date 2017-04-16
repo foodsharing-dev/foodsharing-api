@@ -12,6 +12,7 @@ use JMS\Serializer\Annotation\Groups;
 class ConversationMessage
 {
     /**
+     * @Groups({"conversationDetail"})
      * @ORM\Column(type="integer", options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -29,7 +30,7 @@ class ConversationMessage
      * @ORM\ManyToOne(targetEntity="User", fetch="LAZY")
      * @ORM\JoinColumn(name="foodsaver_id", referencedColumnName="id", nullable=false)
      */
-    private $user;
+    private $sentBy;
 
     /**
      * @Groups({"conversationDetail"})
@@ -126,26 +127,26 @@ class ConversationMessage
     }
 
     /**
-     * Set user
+     * Set sentBy
      *
-     * @param \AppBundle\Entity\User $user
+     * @param \AppBundle\Entity\User $sentBy
      *
      * @return ConversationMessage
      */
-    public function setUser(\AppBundle\Entity\User $user)
+    public function setSentBy(\AppBundle\Entity\User $sentBy)
     {
-        $this->user = $user;
+        $this->sentBy = $sentBy;
 
         return $this;
     }
 
     /**
-     * Get user
+     * Get sentBy
      *
      * @return \AppBundle\Entity\User
      */
-    public function getUser()
+    public function getSentBy()
     {
-        return $this->user;
+        return $this->sentBy;
     }
 }
