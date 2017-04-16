@@ -6,13 +6,13 @@ use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\ConversationRepository")
  * @ORM\Table(name="fs_conversation")
  */
 class Conversation
 {
     /**
-     * @Groups({"conversationDetail"})
+     * @Groups({"conversationList", "conversationDetail"})
      * @ORM\Column(type="integer", options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -25,7 +25,7 @@ class Conversation
     private $locked;
 
     /**
-     * @Groups({"conversationDetail"})
+     * @Groups({"conversationList", "conversationDetail"})
      * @ORM\Column(type="string", length=40, name="`name`")
      */
     private $name;
@@ -36,6 +36,7 @@ class Conversation
     private $firstMessageAt;
 
     /**
+     * @Groups({"conversationList"})
      * @ORM\Column(type="datetime", name="last", nullable=true)
      */
     private $lastMessageAt;
@@ -55,7 +56,7 @@ class Conversation
     /**
      * Intentionally not use denormalized field here for now as long as it does not become a problem.
      *
-     * @Groups({"conversationDetail"})
+     * @Groups({"conversationList"})
      * @ORM\ManyToOne(targetEntity="ConversationMessage", fetch="EAGER")
      * @ORM\JoinColumn(name="last_message_id", referencedColumnName="id")
      */
@@ -329,5 +330,10 @@ class Conversation
     public function getMessages()
     {
         return $this->messages;
+    }
+
+    public function isMember(\AppBundle\Entity\User $user = null)
+    {
+        return $this->members->contains($user);
     }
 }

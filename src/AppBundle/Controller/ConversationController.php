@@ -6,6 +6,8 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use FOS\RestBundle\Context\Context;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Conversation;
 use AppBundle\Entity\ConversationMessage;
@@ -18,11 +20,13 @@ class ConversationController extends FOSRestController
      * Conversations will be ordered (conversation with most recent message first) as well as
      * limited.
      * @ApiDoc()
-     * @View(statusCode=200)
+     * @View(statusCode=200, serializerGroups={"profile", "messageDetail", "conversationList"})
      * @Get("/api/v1/conversations")
      */
-    public function listAction()
+    public function listAction(UserInterface $user = null)
     {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:Conversation');
+        $conversations = $repository->findForUserOrderedByLastMessageDesc($user->getId());
         return ['conversations' => $conversations];
     }
 
@@ -31,13 +35,13 @@ class ConversationController extends FOSRestController
      *
      * @ApiDoc()
      * @Get("/api/v1/conversation/{id}")
+     * @Security("conversation.isMember(user)")
      */
     public function getAction(Conversation $conversation)
     {
-
         $data = ['conversation' => $conversation];
-        $context = new Context();
         $view = $this->view($data, 200);
+        $context = new Context();
         $context->setGroups(array(
             'conversationDetail',
             'members' => array('profile'),
@@ -45,6 +49,5 @@ class ConversationController extends FOSRestController
         ));
         $view->setContext($context);
         return $view;
-        //        return $data;
     }
 }
