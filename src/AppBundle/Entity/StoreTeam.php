@@ -38,6 +38,7 @@ class StoreTeam
     private $coordinator;
 
     /**
+     * @Groups({"storeDetail"})
      * @ORM\Column(type="integer", name="active")
      */
     private $status;
