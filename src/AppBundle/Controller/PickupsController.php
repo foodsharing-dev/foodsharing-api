@@ -7,6 +7,7 @@ use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\View;
 use Symfony\Component\Security\Core\User\UserInterface;
 use AppBundle\Entity\User;
+use AppBundle\Entity\Store;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class PickupsController extends FOSRestController
@@ -35,10 +36,12 @@ class PickupsController extends FOSRestController
      * @View(statusCode=200, serializerGroups={"profile", "userProfileStore", "pickupDetail", "storeDetail"}))
      * @Get("/api/v1/pickups/{store}:{at}")
      */
-    public function getAction($store, \DateTime $at, UserInterface $user = null)
+    public function getAction(Store $store, \DateTime $at, UserInterface $user = null)
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:TakenPickup');
         $pickup = $repository->getPickupDetails($store, $at);
+        $this->denyAccessUnlessGranted('view', $store);
+
         return ['pickup' => $pickup];
     }
 }

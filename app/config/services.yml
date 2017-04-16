@@ -14,6 +14,13 @@ services:
     app.logout_success_handler:
         class: AppBundle\Security\LogoutSuccessHandler
 
+    app.store_voter:
+        class:  AppBundle\Security\StoreVoter
+        tags:
+            - { name: security.voter }
+        # small performance boost
+        public: false
+
     #service_name:
     #    class: AppBundle\Directory\ClassName
     #    arguments: ['@another_service_name', 'plain_value', '%parameter_name%']

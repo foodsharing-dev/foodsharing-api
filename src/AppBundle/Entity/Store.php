@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\Criteria;
 
 /**
 * @ORM\Entity(repositoryClass="AppBundle\Repository\StoreRepository")
@@ -304,5 +305,14 @@ class Store
     public function getTeam()
     {
         return $this->team;
+    }
+
+    public function isInTeam(\AppBundle\Entity\User $user)
+    {
+        $criteria = Criteria::create()
+            ->where(Criteria::expr()->eq("user", $user))
+            ->andWhere(Criteria::expr()->gt("status", 0));
+        $team = $this->getTeam();
+        return count($this->getTeam()->matching($criteria)) > 0;
     }
 }
