@@ -12,23 +12,30 @@ use Doctrine\ORM\Mapping as ORM;
 class TakenPickup
 {
     /**
+     * @Groups({"pickupDetails"})
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="User", fetch="LAZY")
      * @ORM\JoinColumn(name="foodsaver_id", referencedColumnName="id", nullable=false)
      */
     private $user;
 
     /**
+     * @Groups({"pickupDetails"})
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Store", fetch="LAZY")
      * @ORM\JoinColumn(name="betrieb_id", referencedColumnName="id", nullable=false)
      */
     private $store;
 
     /**
-     * @ORM\Column(type="datetime", name="`time``", nullable=false)
+     * @Groups({"pickupDetails"})
+     * @ORM\Id
+     * @ORM\Column(type="datetimekey", name="`date``", nullable=false)
      */
     private $at;
 
     /**
+     * @Groups({"pickupDetails"})
      * @ORM\Column(type="boolean")
      */
     private $confirmed;

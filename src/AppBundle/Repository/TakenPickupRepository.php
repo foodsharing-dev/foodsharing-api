@@ -10,4 +10,18 @@ namespace AppBundle\Repository;
  */
 class TakenPickupRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function findNextForUserOrderedByDate($userId)
+    {
+        return $this->getEntityManager()
+        ->createQueryBuilder()
+        ->select('p')
+        ->from('AppBundle:TakenPickup', 'p')
+        ->where(':user_id = p.user')
+        ->andWhere('p.at > :min_date')
+        ->orderBy('p.at', 'ASC')
+        ->setParameter('user_id', $userId)
+        ->setParameter('min_date', new \DateTime('-1 hour'))
+        ->getQuery()
+        ->getResult();
+    }
 }

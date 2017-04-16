@@ -12,6 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Store
 {
     /**
+     * @Groups({"storeDetails"})
      * @ORM\Column(type="integer", options={"unsigned":true})
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -19,36 +20,43 @@ class Store
     private $id;
 
     /**
+     * @Groups({"storeDetails"})
      * @ORM\Column(type="string", length=5, name="plz")
      */
     private $zip;
 
     /**
+     * @Groups({"storeDetails"})
      * @ORM\Column(type="string", length=50, name="stadt")
      */
     private $city;
 
     /**
+     * @Groups({"storeDetails"})
      * @ORM\Column(type="string", length=120, name="`name")
      */
     private $name;
 
     /**
+     * @Groups({"storeDetails"})
      * @ORM\Column(type="string", length=120, name="str")
      */
     private $street;
 
     /**
+     * @Groups({"storeDetails"})
      * @ORM\Column(type="string", length=20, name="hsnr")
      */
     private $streetNumber;
 
     /**
+     * @Groups({"storeDetails"})
      * @ORM\Column(type="text", name="besonderheiten")
      */
     private $notes;
 
     /**
+     * @Groups({"storeDetails"})
      * @ORM\ManyToOne(targetEntity="Conversation", fetch="LAZY")
      * @ORM\JoinColumn(name="team_conversation_id", referencedColumnName="id", nullable=true)
      */
