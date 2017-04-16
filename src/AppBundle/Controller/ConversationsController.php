@@ -13,7 +13,7 @@ use AppBundle\Entity\Conversation;
 use AppBundle\Entity\ConversationMessage;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
-class ConversationController extends FOSRestController
+class ConversationsController extends FOSRestController
 {
     /**
      * List all conversations the logged in user is active in.
