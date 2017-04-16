@@ -7,6 +7,7 @@ imports:
 # http://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    jms_serializer.camel_case_naming_strategy.class: JMS\Serializer\Naming\IdenticalPropertyNamingStrategy
 
 framework:
     #esi: ~
@@ -90,4 +91,10 @@ bazinga_rest_extra:
         cookie_name:    cookie_csrf
         parameter_name: _csrf_token
 
-nelmio_api_doc: ~
+nelmio_api_doc:
+    sandbox:
+        request_format:
+            formats:
+                json: application/json
+        body_format:
+            formats: [json]
