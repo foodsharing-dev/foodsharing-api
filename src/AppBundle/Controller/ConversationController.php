@@ -37,7 +37,7 @@ class ConversationController extends FOSRestController
      *
      * Take care: Message body has htmlentities applied to it!
      * @ApiDoc()
-     * @Get("/api/v1/conversation/{id}")
+     * @Get("/api/v1/conversations/{id}")
      * @Security("conversation.isMember(user)")
      */
     public function getAction(Conversation $conversation)
