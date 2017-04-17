@@ -37,7 +37,7 @@ class StoresController extends FOSRestController
      */
     public function getAction(Store $store)
     {
-        return ['stores' => $store];
+        return ['store' => $store];
     }
 
 
