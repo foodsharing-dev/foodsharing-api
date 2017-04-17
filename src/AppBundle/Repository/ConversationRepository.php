@@ -16,7 +16,7 @@ class ConversationRepository extends \Doctrine\ORM\EntityRepository
         ->createQueryBuilder()
         ->select('c')
         ->from('AppBundle:Conversation', 'c')
-        ->where(':user_id MEMBER OF c.members')
+        ->where('c.id in (SELECT IDENTITY(m.conversation) FROM AppBundle:ConversationMember m WHERE m.user = :user_id)')
         ->orderBy('c.lastMessageAt', 'DESC')
         ->setParameter('user_id', $userId)
         ->getQuery()

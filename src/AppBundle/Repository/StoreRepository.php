@@ -3,6 +3,8 @@
 namespace AppBundle\Repository;
 
 use AppBundle\Entity\StoreTeam;
+use AppBundle\Entity\Store;
+use Doctrine\ORM\Query\Expr\Join;
 
 /**
  * StoreRepository
@@ -18,9 +20,9 @@ class StoreRepository extends \Doctrine\ORM\EntityRepository
         ->createQueryBuilder()
         ->select('s')
         ->from('AppBundle:StoreTeam', 'st')
-        ->leftJoin('AppBundle:Store', 's')
         ->where('st.status != :not_status')
         ->andWhere('st.user = :user_id')
+        ->leftJoin('AppBundle:Store', 's', Join::WITH, 'st.store = s.id')
         ->orderBy('s.name', 'ASC')
         ->setParameter('user_id', $userId)
         ->setParameter('not_status', StoreTeam::STATUS_REQUESTED)

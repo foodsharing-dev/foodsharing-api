@@ -89,11 +89,6 @@ class User implements AdvancedUserInterface
      */
     private $lastLogin;
 
-    /**
-     * @ORM\ManyToMany(targetEntity="Conversation", mappedBy="members")
-     */
-    private $conversations;
-
     public function isAccountNonExpired()
     {
         return true;
@@ -420,45 +415,5 @@ class User implements AdvancedUserInterface
     {
         return $this->lastLogin;
     }
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->conversations = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
-    /**
-     * Add conversation
-     *
-     * @param \AppBundle\Entity\Conversation $conversation
-     *
-     * @return User
-     */
-    public function addConversation(\AppBundle\Entity\Conversation $conversation)
-    {
-        $this->conversations[] = $conversation;
-
-        return $this;
-    }
-
-    /**
-     * Remove conversation
-     *
-     * @param \AppBundle\Entity\Conversation $conversation
-     */
-    public function removeConversation(\AppBundle\Entity\Conversation $conversation)
-    {
-        $this->conversations->removeElement($conversation);
-    }
-
-    /**
-     * Get conversations
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getConversations()
-    {
-        return $this->conversations;
-    }
 }

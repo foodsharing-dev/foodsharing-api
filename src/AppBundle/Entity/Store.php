@@ -315,4 +315,52 @@ class Store
         $team = $this->getTeam();
         return count($this->getTeam()->matching($criteria)) > 0;
     }
+
+    /**
+     * Set notesPublic
+     *
+     * @param string $notesPublic
+     *
+     * @return Store
+     */
+    public function setNotesPublic($notesPublic)
+    {
+        $this->notesPublic = $notesPublic;
+
+        return $this;
+    }
+
+    /**
+     * Get notesPublic
+     *
+     * @return string
+     */
+    public function getNotesPublic()
+    {
+        return $this->notesPublic;
+    }
+
+    /**
+     * Set status
+     *
+     * @param integer $status
+     *
+     * @return Store
+     */
+    public function setStatus($status)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return integer
+     */
+    public function getStatus()
+    {
+        return $this->status;
+    }
 }

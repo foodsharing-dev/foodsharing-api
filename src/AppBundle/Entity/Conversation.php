@@ -64,11 +64,7 @@ class Conversation
 
     /**
      * @Groups({"conversationList", "conversationDetail"})
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="conversations")
-     * @ORM\JoinTable(name="fs_foodsaver_has_conversation",
-     *   joinColumns={@ORM\JoinColumn(name="conversation_id", referencedColumnName="id")},
-     *   inverseJoinColumns={@ORM\JoinColumn(name="foodsaver_id", referencedColumnName="id")}
-     * )
+     * @ORM\OneToMany(targetEntity="ConversationMember", mappedBy="conversation", fetch="EAGER")
      */
     private $members;
 
@@ -78,13 +74,6 @@ class Conversation
      */
     private $messages;
 
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Get id
@@ -265,40 +254,6 @@ class Conversation
     }
 
     /**
-     * Add member
-     *
-     * @param \AppBundle\Entity\User $member
-     *
-     * @return Conversation
-     */
-    public function addMember(\AppBundle\Entity\User $member)
-    {
-        $this->members[] = $member;
-
-        return $this;
-    }
-
-    /**
-     * Remove member
-     *
-     * @param \AppBundle\Entity\User $member
-     */
-    public function removeMember(\AppBundle\Entity\User $member)
-    {
-        $this->members->removeElement($member);
-    }
-
-    /**
-     * Get members
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getMembers()
-    {
-        return $this->members;
-    }
-
-    /**
      * Add message
      *
      * @param \AppBundle\Entity\ConversationMessage $message
@@ -335,5 +290,47 @@ class Conversation
     public function isMember(\AppBundle\Entity\User $user = null)
     {
         return $this->members->contains($user);
+    }
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->members = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->messages = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add member
+     *
+     * @param \AppBundle\Entity\ConversationMember $member
+     *
+     * @return Conversation
+     */
+    public function addMember(\AppBundle\Entity\ConversationMember $member)
+    {
+        $this->members[] = $member;
+
+        return $this;
+    }
+
+    /**
+     * Remove member
+     *
+     * @param \AppBundle\Entity\ConversationMember $member
+     */
+    public function removeMember(\AppBundle\Entity\ConversationMember $member)
+    {
+        $this->members->removeElement($member);
+    }
+
+    /**
+     * Get members
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 }
