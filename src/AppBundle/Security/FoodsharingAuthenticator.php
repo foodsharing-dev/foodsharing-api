@@ -25,15 +25,13 @@ class FoodsharingAuthenticator extends AbstractGuardAuthenticator
      */
     public function getCredentials(Request $request)
     {
-        if ($request->getPathInfo() != '/api/v1/login' || !$request->isMethod('POST')) {
+        if ($request->getPathInfo() != '/api/v1/session' || !$request->isMethod('POST')) {
           return;
         }
         $content = $request->getContent();
         if (!$content) {
           return;
         }
-        // TODO: should this not check for the login path too? should only be activate
-        // when posting to create a new session
         // TODO: check json content type
         $credentials = $this->serializer->deserialize($content, Credentials::class, 'json');
         if (!$credentials->getEmail() || !$credentials->getPassword()) {

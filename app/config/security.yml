@@ -28,10 +28,6 @@ security:
                 authenticators:
                     - app.foodsharing_authenticator
 
-            logout:
-                path: /api/v1/logout
-                success_handler: app.logout_success_handler
-
-
     access_control:
+        - { path: ^/api/v1/session, allow_if: "true" }
         - { path: ^/api/v1/, roles: ROLE_USER }

@@ -3,6 +3,8 @@ namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations\Post;
+use FOS\RestBundle\Controller\Annotations\Get;
+use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
@@ -20,11 +22,23 @@ class AuthenticationController extends FOSRestController
      *  }
      * )
      * @View(statusCode=200, serializerGroups={"ownUser"})
-     * @Post("/api/v1/login")
+     * @Post("/api/v1/session")
      */
-    public function loginAction(UserInterface $user = null)
+    public function postAction(UserInterface $user = null)
     {
         // actual login is handle with Guard and FoodsharingAuthenticator
+        return ['user' => $user];
+    }
+
+    /**
+     * Retrieve status of session
+     *
+     * @ApiDoc()
+     * @View(statusCode=200, serializerGroups={"ownUser"})
+     * @Get("/api/v1/session")
+     */
+    public function getAction(UserInterface $user = null)
+    {
         return ['user' => $user];
     }
 
@@ -32,10 +46,15 @@ class AuthenticationController extends FOSRestController
      * Logout!
      *
      * @ApiDoc()
-     * @Post("/api/v1/logout")
+     * @Delete("/api/v1/session")
      */
     public function logoutAction()
     {
-        // actual logout is handled by security framework
+        /* Explicit logout as firewall component does not support HTTP method filtering yet.
+          TODO: Add no cookie clearing support yet
+        */
+        $this->get("session")->invalidate();
+        $this->get("security.token_storage")->setToken(null);
+        return ['message' => 'You are now logged out!'];
     }
 }
