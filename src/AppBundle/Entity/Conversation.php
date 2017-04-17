@@ -63,7 +63,7 @@ class Conversation
     private $lastMessage;
 
     /**
-     * @Groups({"conversationDetail"})
+     * @Groups({"conversationList", "conversationDetail"})
      * @ORM\ManyToMany(targetEntity="User", inversedBy="conversations")
      * @ORM\JoinTable(name="fs_foodsaver_has_conversation",
      *   joinColumns={@ORM\JoinColumn(name="conversation_id", referencedColumnName="id")},
