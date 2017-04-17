@@ -9,6 +9,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class AuthenticationController extends FOSRestController
 {
@@ -39,6 +40,10 @@ class AuthenticationController extends FOSRestController
      */
     public function getAction(UserInterface $user = null)
     {
+        if(!$this->isGranted('ROLE_USER')) {
+            throw New NotFoundHttpException();
+        }
+
         return ['user' => $user];
     }
 
