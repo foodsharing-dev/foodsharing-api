@@ -64,7 +64,7 @@ class Conversation
 
     /**
      * @Groups({"conversationList", "conversationDetail"})
-     * @ORM\OneToMany(targetEntity="ConversationMember", mappedBy="conversation", fetch="EAGER")
+     * @ORM\OneToMany(targetEntity="ConversationMember", mappedBy="conversation", fetch="EXTRA_LAZY")
      */
     private $members;
 

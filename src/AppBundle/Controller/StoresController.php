@@ -17,7 +17,7 @@ class StoresController extends FOSRestController
      * List all stores of the logged in user.
      *
      * @ApiDoc()
-     * @View(statusCode=200, serializerGroups={"userId", "storeDetail", "conversationList"})
+     * @View(statusCode=200, serializerGroups={"userId", "storeList", "conversationList"})
      * @Get("/api/v1/stores")
      */
     public function listAction(UserInterface $user = null)

@@ -28,7 +28,7 @@ class Store
     private $id;
 
     /**
-     * @Groups({"storeDetail"})
+     * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="string", length=5, name="plz")
      */
     private $zip;
@@ -46,13 +46,13 @@ class Store
     private $name;
 
     /**
-     * @Groups({"storeDetail"})
+     * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="string", length=120, name="str")
      */
     private $street;
 
     /**
-     * @Groups({"storeDetail"})
+     * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="string", length=20, name="hsnr")
      */
     private $streetNumber;
