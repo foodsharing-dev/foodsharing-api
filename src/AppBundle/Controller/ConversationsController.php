@@ -47,7 +47,7 @@ class ConversationsController extends FOSRestController
         $context = new Context();
         $context->setGroups(array(
             'conversationDetail',
-            'members' => array('profile'),
+            'members' => array('conversationDetail', 'user' => array('profile')),
             'messages' => array('Default', 'conversationDetail', 'sentBy' => array('userId'))
         ));
         $view->setContext($context);
