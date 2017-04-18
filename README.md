@@ -37,3 +37,14 @@ Configure the database access accordingly:
 # Running
 
 Fire up a symfony dev server by running `bin/console server:run`.
+
+# Deploying
+
+Currently, just check it out on the production server and configure it like stated above.
+Follow symfony setup instructions for webserver configuration and make sure to setup necessary proxy paths as well (depending on frontend):
+
+ * Access to websocket
+ * Access to static data
+ * Access to desktop version API
+
+Run `scripts/update.sh` to pull changes from git and reinitiate the cache.
