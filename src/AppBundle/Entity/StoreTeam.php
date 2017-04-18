@@ -19,7 +19,7 @@ class StoreTeam
     /**
      * @Groups({"storeDetail"})
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="User", fetch="LAZY")
+     * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
      * @ORM\JoinColumn(name="foodsaver_id", referencedColumnName="id", nullable=false)
      */
     private $user;
