@@ -289,7 +289,7 @@ class Conversation
 
     public function isMember(\AppBundle\Entity\User $user = null)
     {
-        return $this->members->contains($user);
+        return $this->members->exists(function($key, $elem) use ($user) {return $elem->getUser()->getId() === $user->getId();});
     }
     /**
      * Constructor

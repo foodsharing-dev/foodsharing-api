@@ -12,7 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
 class ConversationMember
 {
     /**
-     * @ORM\Column(type="integer", name="foodsaver_id", options={"unsigned":true})
+     * @Groups({"conversationList", "conversationDetail"})
+     * @ORM\JoinColumn(name="foodsaver_id", referencedColumnName="id", nullable=false)
      * @ORM\ManyToOne(targetEntity="User", fetch="EAGER")
      * @ORM\Id
      */
@@ -20,7 +21,7 @@ class ConversationMember
 
     /**
      * @ORM\ManyToOne(targetEntity="Conversation", inversedBy="members", fetch="LAZY")
-     * @ORM\JoinColumn(name="conversation_id", referencedColumnName="id", nullable=true)
+     * @ORM\JoinColumn(name="conversation_id", referencedColumnName="id", nullable=false)
      * @ORM\Id
      */
     private $conversation;
