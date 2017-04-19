@@ -4,7 +4,7 @@ namespace Tests\AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class DefaultControllerTest extends WebTestCase
+class AuthenticationControllerTest extends WebTestCase
 {
     public function testGet()
     {
@@ -40,6 +40,7 @@ class DefaultControllerTest extends WebTestCase
             $response->headers->contains('Content-Type', 'application/json'),
             $response->headers
         );
+
 
         $this->assertEquals(
             '{"message":"not sure what this should actually be for invalid credentials"}',
