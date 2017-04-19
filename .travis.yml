@@ -6,7 +6,6 @@ cache:
   directories:
     - vendor
 before_script:
-- composer self-update
 - composer update --no-interaction
 script:
 - "./vendor/bin/simple-phpunit"
