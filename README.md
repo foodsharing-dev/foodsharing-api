@@ -1,5 +1,7 @@
 # foodsharing-api
 
+[![Build Status](https://travis-ci.org/foodsharing-dev/foodsharing-api.svg?branch=master)](https://travis-ci.org/foodsharing-dev/foodsharing-api)
+
 This is a foodsharing API backend. It is meant to operate on the same database as the legacy foodsharing.de software, so to keep it simple, it must not modify the schema.
 
 This software is build on symfony 3 with some bundles to simplify providing a json API.
