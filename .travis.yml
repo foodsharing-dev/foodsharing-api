@@ -1,9 +1,12 @@
 language: php
 php:
-  - '5.6'
-  - '7.1'
+- '5.6'
+- '7.1'
 before_script:
-  - composer self-update
-  - composer install --prefer-source --no-interaction --dev
+- composer self-update
+- composer install --prefer-source --no-interaction --dev
 script:
-  - ./vendor/bin/simple-phpunit
+- "./vendor/bin/simple-phpunit"
+notifications:
+  slack:
+    secure: l08qveYL6b3UPZ9jO3dpniRoyi+C2lX/hVqr7RgITugU5oInqS3IwivpURx831zRHCtOqjcWYauPXs+6aOHYd54hpD1TQpreAAwnzJ+8CuaLQFOK17klGSG2mVJt7Le7pjvyDWStR/pdeWxZ8lKa+FwzcUPsbcGLV5SG/O4AGx7ugPYJ9Pb9ov9S9uR0wFqb5VF8mETcGb2vOm/I7nTJsR8lLLYnKUh8UZMkv+n4XSXEzo42njJ0FEQG1udZN3O49D0wg9brUr3df+R0WUD4Jit+eYQkSlxy3Rv1Ym4dveXgCDGXFHqWKMoCbX/9hcikjkdM5W04JjnKgZv6tDlwTMMZ6GxuvweT7jDn8owkFgbXez7y5sEFCAIWxMb1b/aIijzPTEWbmJsmQaDM6a0ZrRJEJ3xz5q0Ykni2al81LESHSsWRQcoeJac57QzEJ6qsdHlJ/PcZQGSi57HeChrWzHnLpmZm+dWx4wZjrh1NaM9L2qOnd0h+pPJHqXj7olrD3JfSe1kbEhy6gIuLLxGduCuxk3xLNhZOkyvlJeh7640rjyiDt+V+mPeYUX7XHxRboi6oomUmnaM7vYuUSHI1Jf2kIB0GVTmAQJRjwbsVGnofJ/ErqFBo3IpK3G6MJuW/EjqMS6T6AxbCu5N5cioa/I6PIaN24euervrI25/Lh4s=
