@@ -12,6 +12,7 @@ services:
     - mysql
 
 before_script:
+    - cp app/config/parameters.yml.ci app/config/parameters.yml
     - composer update --no-interaction
     - mysql -u root -e "CREATE DATABASE foodsharing_test;"
     - mysql -u root -e "CREATE USER 'fstest'@'localhost' IDENTIFIED BY 'fstest';"
