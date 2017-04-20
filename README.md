@@ -36,6 +36,21 @@ Configure the database access accordingly:
 |Port|13306|
 |Database|foodsharing|
 
+# Testing
+
+There is codeception for testing in place. It uses a test database that currently has statically defined credentials in `app/config/parameters_test.yml`:
+
+|Option|Value|
+|----|----|
+|User|fstest|
+|Passwort|fstest|
+|Host|127.0.0.1|
+|Port|3306|
+|Database|foodsharing_test|
+
+Run all tests with `vendor/bin/codecept run`.
+
+
 # Running
 
 Fire up a symfony dev server by running `bin/console server:run`.
