@@ -1,0 +1,56 @@
+server {
+  listen	 443 ssl;
+
+  server_name YourServerName
+  root /var/www/fslight/www/foodsharing-api/web;
+
+  ssl_certificate PathToCrt.pem
+  ssl_certificate_key PathToKey.pem
+
+  location / {
+# try to serve file directly, fallback to app.php
+    try_files $uri /foodsharing-light$uri /app.php$is_args$args;
+  }
+# PROD
+  location ~ ^/app\.php(/|$) {
+    fastcgi_pass unix:/var/run/php5-fpm-fslight.sock;
+    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+    include fastcgi_params;
+# Prevents URIs that include the front controller. This will 404:
+# http://domain.tld/app.php/some-path
+# Remove the internal directive to allow URIs like this
+    internal;
+  }
+
+  location ^~ /foodsharing/socket/ {
+    include nodejs_proxy_params;
+    access_log off;
+    proxy_pass http://lmr_dev_nodejs/;
+  }
+
+  location = /fs/xhrapp.php {
+    rewrite /fs(.*) $1 break;
+    fastcgi_split_path_info ^(.+?\.php)(/.*)$;
+    if (!-f $document_root$fastcgi_script_name) {
+      return 404;
+    }
+    fastcgi_pass lmr_prod_php;
+    fastcgi_index index.php;
+    include fastcgi_params;
+    alias /var/www/lmr-prod/www;
+  }
+
+  location /fs/images/ {
+    alias /var/www/lmr-prod/www/images/;
+    try_files $uri =404;
+  }
+
+# return 404 for all other php files not matching the front controller
+# this prevents access to other php files you don't want to be accessible.
+  location ~ \.php$ {
+    return 404;
+  }
+
+  error_log /var/www/fslight/log/nginx_error.log;
+  access_log /var/www/fslight/log/nginx_access.log;
+}
