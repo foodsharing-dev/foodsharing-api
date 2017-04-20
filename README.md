@@ -18,7 +18,7 @@ This software is build on symfony 3 with some bundles to simplify providing a js
 
 ## Install
 
-To install, just clone the repository and run `composer update`.
+To install, just clone the repository and run `composer install`.
 
 ## Database
 
