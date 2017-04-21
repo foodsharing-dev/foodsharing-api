@@ -25,21 +25,20 @@ class User implements AdvancedUserInterface
     private $id;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=false)
      */
-    private $verified;
-
+    private $verified = false;
     /**
      * @ORM\Column(type="integer", name="rolle")
      */
-    private $role;
+    private $role = 0;
 
     /**
      * @Groups({"ownUser", "profile"})
      * @Expose
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private $photo;
+    private $photo = "";
 
     /**
      * @ORM\Column(type="string", length=120)
@@ -47,45 +46,45 @@ class User implements AdvancedUserInterface
     private $email;
 
     /**
-     * @ORM\Column(type="string", length=32)
+     * @ORM\Column(type="string", name="passwd", length=32)
      */
-    private $passwd;
+    private $password;
 
     /**
      * @Groups({"ownUser", "profile"})
      * @Expose
      * @ORM\Column(type="string", length=120, name="`name`")
      */
-    private $firstName;
+    private $firstName = "";
 
     /**
      * @Groups({"ownUser"})
      * @Expose
      * @ORM\Column(type="string", length=120, name="nachname")
      */
-    private $lastName;
+    private $lastName = "";
 
     /**
      * @Expose
      * @Groups({"userProfileStore"})
      * @ORM\Column(type="string", length=30, name="telefon")
      */
-    private $phone;
+    private $phone = "";
 
     /**
      * @Expose
      * @Groups({"userProfileStore"})
      * @ORM\Column(type="string", length=50, name="handy")
      */
-    private $mobile;
+    private $mobile = "";
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $active;
+    private $active = false;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $lastLogin;
 
@@ -225,33 +224,9 @@ class User implements AdvancedUserInterface
         return $this->email;
     }
 
-    /**
-     * Set passwd
-     *
-     * @param string $passwd
-     *
-     * @return User
-     */
-    public function setPasswd($passwd)
-    {
-        $this->passwd = $passwd;
-
-        return $this;
-    }
-
-    /**
-     * Get passwd
-     *
-     * @return string
-     */
-    public function getPasswd()
-    {
-        return $this->passwd;
-    }
-
     public function getPassword()
     {
-        return $this->passwd;
+        return $this->password;
     }
 
     /**
@@ -416,4 +391,18 @@ class User implements AdvancedUserInterface
         return $this->lastLogin;
     }
 
+
+    /**
+     * Set password
+     *
+     * @param string $password
+     *
+     * @return User
+     */
+    public function setPassword($password)
+    {
+        $this->password = $password;
+
+        return $this;
+    }
 }

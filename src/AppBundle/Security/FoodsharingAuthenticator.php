@@ -3,6 +3,7 @@ namespace AppBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -29,18 +30,16 @@ class FoodsharingAuthenticator extends AbstractGuardAuthenticator
           return;
         }
         $content = $request->getContent();
-        if (!$content) {
-          return;
+        if ($content) {
+            $credentials = $this->serializer->deserialize($content, Credentials::class, 'json');
+            if ($credentials->getEmail() !== null && $credentials->getPassword() !== null) {
+                // no token? Return null and no other methods will be called
+                return $credentials;
+            }
         }
-        // TODO: check json content type
-        $credentials = $this->serializer->deserialize($content, Credentials::class, 'json');
-        if (!$credentials->getEmail() || !$credentials->getPassword()) {
-            // no token? Return null and no other methods will be called
-            return;
-        }
-        // What you return here will be passed to getUser() as $credentials
-        return $credentials;
+        throw new BadRequestHttpException('You need to provide email and password field to login!');
     }
+
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
         return $userProvider->loadUserByUsername($credentials->getEmail());
@@ -48,7 +47,7 @@ class FoodsharingAuthenticator extends AbstractGuardAuthenticator
     public function checkCredentials($credentials, UserInterface $user)
     {
         $passwd = $this->encryptMd5($user->getEmail(), $credentials->getPassword());
-        return hash_equals($user->getPasswd(), $passwd);
+        return hash_equals($user->getPassword(), $passwd);
     }
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
