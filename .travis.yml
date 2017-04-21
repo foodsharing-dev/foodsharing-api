@@ -12,12 +12,12 @@ services:
     - mysql
 
 before_script:
-    - cp app/config/parameters.yml.ci app/config/parameters.yml
-    - ./scripts/update_test_db.sh
-    - composer update --no-interaction
     - mysql -u root -e "CREATE DATABASE foodsharing_test;"
     - mysql -u root -e "CREATE USER 'fstest'@'localhost' IDENTIFIED BY 'fstest';"
     - mysql -u root -e "GRANT ALL ON foodsharing_test.* TO 'fstest'@'localhost';"
+    - cp app/config/parameters.yml.ci app/config/parameters.yml
+    - ./scripts/update_test_db.sh
+    - composer update --no-interaction
 
 script:
     - "./vendor/bin/codecept run"
