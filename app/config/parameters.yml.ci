@@ -1,10 +1,15 @@
-# This file is auto-generated during the composer install
+# This file will be used as parameters.yml when run by CI
 parameters:
     database_host: 127.0.0.1
     database_port: 3306
     database_name: foodsharing_test
     database_user: fstest
     database_password: fstest
+    database_test_host: 127.0.0.1
+    database_test_port: 3306
+    database_test_name: foodsharing_test
+    database_test_user: fstest
+    database_test_password: fstest
     mailer_transport: smtp
     mailer_host: 127.0.0.1
     mailer_user: null
