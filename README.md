@@ -10,7 +10,7 @@ This software is build on symfony 3 with some bundles to simplify providing a js
 
 ## Requirements
 
-* PHP (>=5.6, 7 recommended)
+* PHP (>=5.6, >=7.1 for development)
 * composer
 * MySQL
 * PDO MySQL module
