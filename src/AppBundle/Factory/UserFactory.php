@@ -1,9 +1,10 @@
 <?php
 namespace AppBundle\Factory;
 
+
 use League\FactoryMuffin\Faker\Facade as Faker;
 use AppBundle\Entity\User as User;
-use AppBundle\Foodsharing;
+use AppBundle\Util\Foodsharing;
 
 $fm->define(User::class)->setDefinitions([
     'firstName'   => Faker::firstName(),

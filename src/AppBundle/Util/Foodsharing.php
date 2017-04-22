@@ -1,5 +1,5 @@
 <?php
-namespace AppBundle;
+namespace AppBundle\Util;
 
 class Foodsharing {
     public static function pw_hash($email, $pw)
