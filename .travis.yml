@@ -12,6 +12,7 @@ services:
     - mysql
 
 before_script:
+    - mysql -u root -e "DROP DATABASE IF EXISTS foodsharing_test;"
     - mysql -u root -e "CREATE DATABASE foodsharing_test;"
     - mysql -u root -e "CREATE USER 'fstest'@'localhost' IDENTIFIED BY 'fstest';"
     - mysql -u root -e "GRANT ALL ON foodsharing_test.* TO 'fstest'@'localhost';"
