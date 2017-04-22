@@ -8,7 +8,7 @@ modules:
         - Doctrine2:
             depends: Symfony
         - DataFactory:
-            factories: tests/_support/factories
+            factories: Factory
             depends: Doctrine2
         - \AppBundle\Helper\Factories
     config:
