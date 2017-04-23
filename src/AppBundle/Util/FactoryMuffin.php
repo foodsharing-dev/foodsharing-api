@@ -12,7 +12,7 @@ class FactoryMuffin {
         self::init();
     }
 
-    function init($manager)
+    public static function init($manager)
     {
         self::$fm = new fm(new RepositoryStore($manager));
         self::$fm->loadFactories(__DIR__.'/../Factory');
