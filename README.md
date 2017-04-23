@@ -38,7 +38,7 @@ Configure the database access accordingly:
 
 # Testing
 
-There is codeception for testing in place. It uses a test database that currently has statically defined credentials in `app/config/parameters_test.yml`:
+There is codeception for testing in place. It uses a test database that has credentials in `app/config/parameters.yml`. You can define them as you wish for your local setup, an example configuration would be:
 
 |Option|Value|
 |----|----|
@@ -48,8 +48,18 @@ There is codeception for testing in place. It uses a test database that currentl
 |Port|3306|
 |Database|foodsharing_test|
 
-Run all tests with `vendor/bin/codecept run`.
+Once you have defined the credentials you can create the test database and import the schema with:
 
+```bash
+./bin/console --env=test doctrine:database:create
+./bin/console --env=test doctrine:schema:update --force
+```
+
+Then run the tests with:
+
+```bash
+/vendor/bin/codecept run
+```
 
 # Running
 
