@@ -15,6 +15,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class User implements AdvancedUserInterface
 {
+    const ROLE_FOODSHARER = 0;
+    const ROLE_FOODSAVER = 1;
+    const ROLE_STORE_COORDINATOR = 2;
+    const ROLE_AMBASSADOR = 3;
+    const ROLE_ADMIN = 4;
+    const ROLE_SUPER_ADMIN = 5;
     /**
      * @Groups({"ownUser", "profile", "userId"})
      * @Expose

@@ -19,6 +19,21 @@ class Store
     const STATUS_THIRD_PARTY_COOPERATION = 5;
     const STATUS_CHARITY_NO_WASTE = 6;
 
+    const EFT_NONE = 0;
+    const EFT_MORNING = 1;
+    const EFT_NOON = 2;
+    const EFT_EVENING = 3;
+    const EFT_NIGHT = 4;
+
+    const CONVICTION_EASY = 1;
+    const CONVICTION_MEDIUM = 2;
+    const CONVICTION_DIFFICULT = 3;
+    const CONVICTION_NEEDED_TIME = 4;
+
+    const TEAM_STATUS_FULL = 0;
+    const TEAM_STATUS_OPEN = 1;
+    const TEAM_STATUS_IN_NEED = 2;
+
     /**
      * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="integer", options={"unsigned":true})
@@ -26,6 +41,19 @@ class Store
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
+
+    /**
+     * @Groups({"storeList", "storeDetail"})
+     * @ORM\ManyToOne(targetEntity="Group", fetch="LAZY")
+     * @ORM\JoinColumn(name="bezirk_id", referencedColumnName="id", nullable=false)
+     */
+    private $district;
+
+    /**
+     * @Groups({"storeDetail"})
+     * @ORM\Column(type="date", name="added")
+     */
+    private $created_at;
 
     /**
      * @Groups({"storeList", "storeDetail"})
@@ -59,13 +87,13 @@ class Store
 
     /**
      * @Groups({"storeDetail"})
-     * @ORM\Column(type="text", name="besonderheiten")
+     * @ORM\Column(type="text", name="besonderheiten", nullable=true)
      */
     private $notes;
 
     /**
      * @Groups({"storeDetail"})
-     * @ORM\Column(type="text", name="public_info")
+     * @ORM\Column(type="text", name="public_info", nullable=true)
      */
     private $notesPublic;
 
@@ -78,17 +106,62 @@ class Store
 
     /**
      * @Groups({"storeDetail"})
+     * @ORM\ManyToOne(targetEntity="Conversation", fetch="LAZY")
+     * @ORM\JoinColumn(name="springer_conversation_id", referencedColumnName="id", nullable=true)
+     */
+    private $waiterConversation;
+
+    /**
+     * @Groups({"storeDetail"})
      * @ORM\OneToMany(targetEntity="StoreTeam", mappedBy="store")
      */
     private $team;
 
     /**
      * Groups({"storeList", "storeDetail"})
-     * @ORM\Column(type="integer", name="betrieb_status_id")
+     * @ORM\Column(type="smallint", name="betrieb_status_id")
      */
-    private $status;
+    private $status = self::STATUS_NO_CONTACT;
 
     /**
+     * @ORM\Column(type="smallint", name="public_time")
+     */
+    private $estimatedFetchTime = self::EFT_NONE;
+
+    /**
+     * @ORM\Column(type="smallint", name="ueberzeugungsarbeit")
+     */
+    private $conviction = self::CONVICTION_EASY;
+
+    /**
+     * describes if the store cooperation might be used in communication towards press
+     * @ORM\Column(type="boolean", name="presse")
+     */
+    private $nameInPressOk = false;
+
+    /**
+     * describes if the store would like to have foodsharing stickers in the shop
+     * @ORM\Column(type="boolean", name="sticker")
+     */
+    private $putStickerOk = false;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="StoreFetchWeight", fetch="EAGER")
+     * @ORM\JoinColumn(name="abholmenge", referencedColumnName="id", nullable=false)
+     */
+    private $averageFetchWeight;
+
+    /**
+     * @ORM\Column(type="smallint", name="team_status")
+     */
+    private $teamStatus = self::TEAM_STATUS_FULL;
+
+    /**
+     * @ORM\Column(type="integer", options={"unsigned": true}, name="prefetchtime")
+     */
+    private $pickupSignupAdvance = 1209600;
+
+     /**
      * Get id
      *
      * @return integer
@@ -271,6 +344,7 @@ class Store
     public function __construct()
     {
         $this->team = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->created_at = new \DateTime();
     }
 
     /**
@@ -362,5 +436,245 @@ class Store
     public function getStatus()
     {
         return $this->status;
+    }
+
+    /**
+     * Set createdAt
+     *
+     * @param \DateTime $createdAt
+     *
+     * @return Store
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->created_at = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Get createdAt
+     *
+     * @return \DateTime
+     */
+    public function getCreatedAt()
+    {
+        return $this->created_at;
+    }
+
+    /**
+     * Set estimatedFetchTime
+     *
+     * @param integer $estimatedFetchTime
+     *
+     * @return Store
+     */
+    public function setEstimatedFetchTime($estimatedFetchTime)
+    {
+        $this->estimatedFetchTime = $estimatedFetchTime;
+
+        return $this;
+    }
+
+    /**
+     * Get estimatedFetchTime
+     *
+     * @return integer
+     */
+    public function getEstimatedFetchTime()
+    {
+        return $this->estimatedFetchTime;
+    }
+
+    /**
+     * Set conviction
+     *
+     * @param integer $conviction
+     *
+     * @return Store
+     */
+    public function setConviction($conviction)
+    {
+        $this->conviction = $conviction;
+
+        return $this;
+    }
+
+    /**
+     * Get conviction
+     *
+     * @return integer
+     */
+    public function getConviction()
+    {
+        return $this->conviction;
+    }
+
+    /**
+     * Set nameInPressOk
+     *
+     * @param boolean $nameInPressOk
+     *
+     * @return Store
+     */
+    public function setNameInPressOk($nameInPressOk)
+    {
+        $this->nameInPressOk = $nameInPressOk;
+
+        return $this;
+    }
+
+    /**
+     * Get nameInPressOk
+     *
+     * @return boolean
+     */
+    public function getNameInPressOk()
+    {
+        return $this->nameInPressOk;
+    }
+
+    /**
+     * Set putStickerOk
+     *
+     * @param boolean $putStickerOk
+     *
+     * @return Store
+     */
+    public function setPutStickerOk($putStickerOk)
+    {
+        $this->putStickerOk = $putStickerOk;
+
+        return $this;
+    }
+
+    /**
+     * Get putStickerOk
+     *
+     * @return boolean
+     */
+    public function getPutStickerOk()
+    {
+        return $this->putStickerOk;
+    }
+
+    /**
+     * Set district
+     *
+     * @param \AppBundle\Entity\Group $district
+     *
+     * @return Store
+     */
+    public function setDistrict(\AppBundle\Entity\Group $district = null)
+    {
+        $this->district = $district;
+
+        return $this;
+    }
+
+    /**
+     * Get district
+     *
+     * @return \AppBundle\Entity\Group
+     */
+    public function getDistrict()
+    {
+        return $this->district;
+    }
+
+    /**
+     * Set averageFetchWeight
+     *
+     * @param \AppBundle\Entity\StoreFetchWeight $averageFetchWeight
+     *
+     * @return Store
+     */
+    public function setAverageFetchWeight(\AppBundle\Entity\StoreFetchWeight $averageFetchWeight)
+    {
+        $this->averageFetchWeight = $averageFetchWeight;
+
+        return $this;
+    }
+
+    /**
+     * Get averageFetchWeight
+     *
+     * @return \AppBundle\Entity\StoreFetchWeight
+     */
+    public function getAverageFetchWeight()
+    {
+        return $this->averageFetchWeight;
+    }
+
+    /**
+     * Set teamStatus
+     *
+     * @param integer $teamStatus
+     *
+     * @return Store
+     */
+    public function setTeamStatus($teamStatus)
+    {
+        $this->teamStatus = $teamStatus;
+
+        return $this;
+    }
+
+    /**
+     * Get teamStatus
+     *
+     * @return integer
+     */
+    public function getTeamStatus()
+    {
+        return $this->teamStatus;
+    }
+
+    /**
+     * Set pickupSignupAdvance
+     *
+     * @param integer $pickupSignupAdvance
+     *
+     * @return Store
+     */
+    public function setPickupSignupAdvance($pickupSignupAdvance)
+    {
+        $this->pickupSignupAdvance = $pickupSignupAdvance;
+
+        return $this;
+    }
+
+    /**
+     * Get pickupSignupAdvance
+     *
+     * @return integer
+     */
+    public function getPickupSignupAdvance()
+    {
+        return $this->pickupSignupAdvance;
+    }
+
+    /**
+     * Set waiterConversation
+     *
+     * @param \AppBundle\Entity\Conversation $waiterConversation
+     *
+     * @return Store
+     */
+    public function setWaiterConversation(\AppBundle\Entity\Conversation $waiterConversation = null)
+    {
+        $this->waiterConversation = $waiterConversation;
+
+        return $this;
+    }
+
+    /**
+     * Get waiterConversation
+     *
+     * @return \AppBundle\Entity\Conversation
+     */
+    public function getWaiterConversation()
+    {
+        return $this->waiterConversation;
     }
 }

@@ -22,11 +22,11 @@ class Conversation
     /**
      * @ORM\Column(type="boolean")
      */
-    private $locked;
+    private $locked = false;
 
     /**
      * @Groups({"conversationList", "conversationDetail"})
-     * @ORM\Column(type="string", length=40, name="`name`")
+     * @ORM\Column(type="string", length=40, name="`name`", nullable=true)
      */
     private $name;
 
