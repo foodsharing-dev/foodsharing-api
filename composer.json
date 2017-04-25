@@ -21,7 +21,6 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "doctrine/data-fixtures": "^1.2",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/doctrine-cache-bundle": "^1.2",
         "doctrine/orm": "^2.5",
@@ -41,11 +40,16 @@
     },
     "require-dev": {
         "codeception/codeception": "^2.2",
+        "doctrine/data-fixtures": "^1.2",
         "doctrine/doctrine-fixtures-bundle": "^2.3",
+        "hautelook/alice-bundle": "^2.0@beta",
         "league/factory-muffin": "^3.0",
         "league/factory-muffin-faker": "^2.0",
+        "nelmio/alice": "^3.0@beta",
+        "ocramius/proxy-manager": "^2.1",
         "sensio/generator-bundle": "^3.0",
-        "symfony/phpunit-bridge": "^3.0"
+        "symfony/phpunit-bridge": "^3.0",
+        "theofidry/alice-data-fixtures": "^1.0@beta"
     },
     "scripts": {
         "symfony-scripts": [

@@ -1,12 +1,16 @@
 AppBundle\Entity\User:
-    inactive_{1..5}:
+    user_bare (template):
         firstName: <firstName()>
-        lastName: <lastName()>
         email: <email()>
+        password: <password()>
+
+    inactive{0..2} (extends user_bare):
         active: false
 
-    foodsharer_{1..10}:
-        firstName: <firstName()>
-        lastName: <lastName()>
-        email: <email()>
+    foodsharer{0..3} (extends user_bare):
         active: true
+
+    foodsaver{0..10} (extends user_bare):
+        active: true
+        verified: true
+        role: <(AppBundle\Entity\User::ROLE_FOODSAVER)>

@@ -36,3 +36,9 @@ monolog:
 
 swiftmailer:
     disable_delivery: true
+
+hautelook_alice:
+    fixtures_path: 'Resources/fixtures/orm' # Path to which to look for fixtures relative to the bundle path.
+
+nelmio_alice:
+    locale: de_DE

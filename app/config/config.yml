@@ -64,7 +64,6 @@ doctrine:
         user: '%database_user%'
         password: '%database_password%'
         charset: UTF8
-        schema_filter: ~^(fs_foodsaver|fs_betrieb|fs_conversation|fs_msg|fs_foodsaver_has_conversation)$~
         types:
             datetimekey: AppBundle\Type\DateTimeKeyType
         # if using pdo_sqlite as your database driver:
