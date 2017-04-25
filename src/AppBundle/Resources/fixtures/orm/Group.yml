@@ -1,0 +1,3 @@
+AppBundle\Entity\Group:
+    leafDistrict{1..5}:
+        name: <words(3, true)>

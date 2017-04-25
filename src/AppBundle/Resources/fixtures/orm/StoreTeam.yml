@@ -1,0 +1,5 @@
+AppBundle\Entity\StoreTeam:
+    store0TeamMember{0..3}:
+        user: '@foodsaver<numberBetween(0, 10)>'
+        store: '@CooperatingStore0'
+        coordinator: '60%? 1 : 0'

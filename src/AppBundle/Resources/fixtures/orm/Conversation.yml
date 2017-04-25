@@ -1,0 +1,9 @@
+AppBundle\Entity\Conversation:
+    storeTeamConversation{0..5}:
+        locked: true
+
+    storeWaiterConversation{0..5}:
+        locked: true
+
+    regularConversation{0..10}:
+        name: '20%? <words(3, true)>'

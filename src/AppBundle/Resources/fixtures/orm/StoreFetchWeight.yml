@@ -1,0 +1,4 @@
+AppBundle\Entity\StoreFetchWeight:
+    storeFetchWeight{0..7}:
+        id: <current()>
+        averageWeight: <(array("1.5", "2.0", "4.0", "7.5", "15.0", "25.0", "45.0", "64.0")[$current])>
