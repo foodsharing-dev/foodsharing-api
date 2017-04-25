@@ -41,7 +41,7 @@ class StoreTeam
      * @Groups({"storeDetail"})
      * @ORM\Column(type="integer", name="active")
      */
-    private $status;
+    private $status = 0;
 
     /**
      * Set coordinator
