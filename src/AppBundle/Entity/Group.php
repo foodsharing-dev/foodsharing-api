@@ -2,9 +2,7 @@
 
 namespace AppBundle\Entity;
 
-use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\Criteria;
 
 /**
  * @ORM\Entity()
@@ -24,11 +22,10 @@ class Group
      */
     private $name;
 
-
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

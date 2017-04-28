@@ -1,10 +1,11 @@
-<?php namespace AppBundle\DataFixtures\ORM;
+<?php
+
+namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use AppBundle\Util\FactoryMuffin;
-use AppBundle\Entity\User;
 
 class LoadStoreData implements FixtureInterface, OrderedFixtureInterface
 {

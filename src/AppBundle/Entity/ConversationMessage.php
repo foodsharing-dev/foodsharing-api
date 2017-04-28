@@ -47,7 +47,7 @@ class ConversationMessage
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {

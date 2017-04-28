@@ -67,7 +67,7 @@ class TakenPickup
     /**
      * Set confirmed
      *
-     * @param boolean $confirmed
+     * @param bool $confirmed
      *
      * @return TakenPickup
      */
@@ -81,7 +81,7 @@ class TakenPickup
     /**
      * Get confirmed
      *
-     * @return boolean
+     * @return bool
      */
     public function getConfirmed()
     {

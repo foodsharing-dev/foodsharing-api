@@ -24,6 +24,7 @@ class StoresController extends FOSRestController
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Store');
         $stores = $repository->findAllForUserOrderedByName($user->getId());
+
         return ['stores' => $stores];
     }
 
@@ -39,6 +40,4 @@ class StoresController extends FOSRestController
     {
         return ['store' => $store];
     }
-
-
 }

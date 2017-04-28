@@ -34,7 +34,7 @@ class ConversationMember
     /**
      * Set user
      *
-     * @param integer $user
+     * @param int $user
      *
      * @return ConversationMember
      */
@@ -48,7 +48,7 @@ class ConversationMember
     /**
      * Get user
      *
-     * @return integer
+     * @return int
      */
     public function getUser()
     {
@@ -58,7 +58,7 @@ class ConversationMember
     /**
      * Set conversation
      *
-     * @param integer $conversation
+     * @param int $conversation
      *
      * @return ConversationMember
      */
@@ -72,7 +72,7 @@ class ConversationMember
     /**
      * Get conversation
      *
-     * @return integer
+     * @return int
      */
     public function getConversation()
     {
@@ -82,7 +82,7 @@ class ConversationMember
     /**
      * Set unread
      *
-     * @param boolean $unread
+     * @param bool $unread
      *
      * @return ConversationMember
      */
@@ -96,7 +96,7 @@ class ConversationMember
     /**
      * Get unread
      *
-     * @return boolean
+     * @return bool
      */
     public function getUnread()
     {

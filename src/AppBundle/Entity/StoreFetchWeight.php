@@ -24,7 +24,7 @@ class StoreFetchWeight
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -58,7 +58,7 @@ class StoreFetchWeight
     /**
      * Set id
      *
-     * @param integer $id
+     * @param int $id
      *
      * @return StoreFetchWeight
      */

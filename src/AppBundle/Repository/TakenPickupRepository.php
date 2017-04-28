@@ -2,8 +2,6 @@
 
 namespace AppBundle\Repository;
 
-use Doctrine\ORM\Query;
-
 /**
  * TakenPickupRepository
  *
@@ -41,7 +39,7 @@ class TakenPickupRepository extends \Doctrine\ORM\EntityRepository
         ->getResult();
 
         $members = array();
-        foreach($pickup as $p) {
+        foreach ($pickup as $p) {
             $members[] = array('user' => $p->getUser(), 'confirmed' => $p->getConfirmed());
         }
         $result = array('store' => $pickup[0]->getStore(), 'at' => $pickup[0]->getAt(), 'members' => $members);

@@ -10,7 +10,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use AppBundle\Entity\User;
 use AppBundle\Entity\Conversation;
-use AppBundle\Entity\ConversationMessage;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 
 class ConversationsController extends FOSRestController
@@ -21,6 +20,7 @@ class ConversationsController extends FOSRestController
      * limited.
      *
      * Take care: Message body has htmlentities applied to it!
+     *
      * @ApiDoc()
      * @View(statusCode=200, serializerGroups={"profile", "messageDetail", "conversationList"})
      * @Get("/api/v1/conversations")
@@ -29,6 +29,7 @@ class ConversationsController extends FOSRestController
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Conversation');
         $conversations = $repository->findForUserOrderedByLastMessageDesc($user->getId());
+
         return ['conversations' => $conversations];
     }
 
@@ -36,6 +37,7 @@ class ConversationsController extends FOSRestController
      * Get details on a conversation.
      *
      * Take care: Message body has htmlentities applied to it!
+     *
      * @ApiDoc()
      * @Get("/api/v1/conversations/{id}")
      * @Security("conversation.isMember(user)")
@@ -48,9 +50,10 @@ class ConversationsController extends FOSRestController
         $context->setGroups(array(
             'conversationDetail',
             'members' => array('conversationDetail', 'user' => array('profile')),
-            'messages' => array('Default', 'conversationDetail', 'sentBy' => array('userId'))
+            'messages' => array('Default', 'conversationDetail', 'sentBy' => array('userId')),
         ));
         $view->setContext($context);
+
         return $view;
     }
 }

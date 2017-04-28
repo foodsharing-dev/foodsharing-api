@@ -24,6 +24,7 @@ class PickupsController extends FOSRestController
     {
         $repository = $this->getDoctrine()->getRepository('AppBundle:TakenPickup');
         $pickups = $repository->findNextForUserOrderedByDate($user->getId());
+
         return ['pickups' => $pickups];
     }
 

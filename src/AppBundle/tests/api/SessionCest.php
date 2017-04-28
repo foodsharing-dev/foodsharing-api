@@ -1,6 +1,6 @@
 <?php
+
 namespace AppBundle;
-use AppBundle\ApiTester;
 
 class SessionCest
 {
@@ -17,7 +17,7 @@ class SessionCest
     {
         $I->wantTo('request my user information although I am not logged in');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->haveHttpHeader('Accept','application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->sendGET('/session');
         $I->seeResponseCodeIs(404);
     }
@@ -26,7 +26,7 @@ class SessionCest
     {
         $I->wantTo('login with wrong credentials');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->haveHttpHeader('Accept','application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->sendPOST('/session', ['email' => 'user1@example.com', 'password' => 'wrong']);
         $I->seeResponseCodeIs(403);
     }
@@ -36,7 +36,7 @@ class SessionCest
         $I->wantTo('login with correct credentials of a disabled account');
         $this->user->setActive(false);
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->haveHttpHeader('Accept','application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->sendPOST('/session', ['email' => $this->user->getEmail(), 'password' => $this->user->clearPassword]);
         $I->seeResponseCodeIs(403);
     }
@@ -45,7 +45,7 @@ class SessionCest
     {
         $I->wantTo('login with correct credentials');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->haveHttpHeader('Accept','application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->sendPOST('/session', ['email' => $this->user->getEmail(), 'password' => $this->user->clearPassword]);
         $I->seeResponseCodeIs(200);
         $I->seeResponseIsJson();
@@ -58,7 +58,7 @@ class SessionCest
     {
         $I->wantTo('login with empty credentials');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->haveHttpHeader('Accept','application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->sendPOST('/session', ['email' => '', 'password' => '']);
         $I->seeResponseCodeIs(403);
     }
@@ -67,7 +67,7 @@ class SessionCest
     {
         $I->wantTo('login without credentials');
         $I->haveHttpHeader('Content-Type', 'application/json');
-        $I->haveHttpHeader('Accept','application/json');
+        $I->haveHttpHeader('Accept', 'application/json');
         $I->sendPOST('/session');
         $I->seeResponseCodeIs(400);
     }

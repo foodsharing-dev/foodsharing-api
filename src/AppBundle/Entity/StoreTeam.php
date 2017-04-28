@@ -46,7 +46,7 @@ class StoreTeam
     /**
      * Set coordinator
      *
-     * @param boolean $coordinator
+     * @param bool $coordinator
      *
      * @return StoreTeam
      */
@@ -60,7 +60,7 @@ class StoreTeam
     /**
      * Get coordinator
      *
-     * @return boolean
+     * @return bool
      */
     public function getCoordinator()
     {
@@ -70,7 +70,7 @@ class StoreTeam
     /**
      * Set status
      *
-     * @param integer $status
+     * @param int $status
      *
      * @return StoreTeam
      */
@@ -84,7 +84,7 @@ class StoreTeam
     /**
      * Get status
      *
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {

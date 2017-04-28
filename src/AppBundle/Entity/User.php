@@ -44,7 +44,7 @@ class User implements AdvancedUserInterface
      * @Expose
      * @ORM\Column(type="string", length=50, nullable=false)
      */
-    private $photo = "";
+    private $photo = '';
 
     /**
      * @ORM\Column(type="string", length=120)
@@ -61,28 +61,28 @@ class User implements AdvancedUserInterface
      * @Expose
      * @ORM\Column(type="string", length=120, name="`name`")
      */
-    private $firstName = "";
+    private $firstName = '';
 
     /**
      * @Groups({"ownUser"})
      * @Expose
      * @ORM\Column(type="string", length=120, name="nachname")
      */
-    private $lastName = "";
+    private $lastName = '';
 
     /**
      * @Expose
      * @Groups({"userProfileStore"})
      * @ORM\Column(type="string", length=30, name="telefon")
      */
-    private $phone = "";
+    private $phone = '';
 
     /**
      * @Expose
      * @Groups({"userProfileStore"})
      * @ORM\Column(type="string", length=50, name="handy")
      */
-    private $mobile = "";
+    private $mobile = '';
 
     /**
      * @ORM\Column(type="boolean")
@@ -117,7 +117,7 @@ class User implements AdvancedUserInterface
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -127,7 +127,7 @@ class User implements AdvancedUserInterface
     /**
      * Set verified
      *
-     * @param boolean $verified
+     * @param bool $verified
      *
      * @return User
      */
@@ -141,7 +141,7 @@ class User implements AdvancedUserInterface
     /**
      * Get verified
      *
-     * @return boolean
+     * @return bool
      */
     public function getVerified()
     {
@@ -151,7 +151,7 @@ class User implements AdvancedUserInterface
     /**
      * Set role
      *
-     * @param integer $role
+     * @param int $role
      *
      * @return User
      */
@@ -165,7 +165,7 @@ class User implements AdvancedUserInterface
     /**
      * Get role
      *
-     * @return integer
+     * @return int
      */
     public function getRole()
     {
@@ -173,12 +173,12 @@ class User implements AdvancedUserInterface
     }
 
     /** Get roles
-     *
      * @return string[]
      */
     public function getRoles()
     {
         $roles = ['ROLE_FOODSHARER', 'ROLE_FOODSAVER', 'ROLE_STORE_COORDINATOR', 'ROLE_AMBASSADOR', 'ROLE_ADMIN', 'ROLE_SUPER_ADMIN'];
+
         return array('ROLE_USER', $roles[$this->role]);
     }
 
@@ -250,7 +250,6 @@ class User implements AdvancedUserInterface
 
     public function eraseCredentials()
     {
-
     }
 
     /**
@@ -352,7 +351,7 @@ class User implements AdvancedUserInterface
     /**
      * Set active
      *
-     * @param boolean $active
+     * @param bool $active
      *
      * @return User
      */
@@ -366,7 +365,7 @@ class User implements AdvancedUserInterface
     /**
      * Get active
      *
-     * @return boolean
+     * @return bool
      */
     public function getActive()
     {
@@ -396,7 +395,6 @@ class User implements AdvancedUserInterface
     {
         return $this->lastLogin;
     }
-
 
     /**
      * Set password

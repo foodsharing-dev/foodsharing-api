@@ -74,11 +74,10 @@ class Conversation
      */
     private $messages;
 
-
     /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -88,7 +87,7 @@ class Conversation
     /**
      * Set locked
      *
-     * @param boolean $locked
+     * @param bool $locked
      *
      * @return Conversation
      */
@@ -102,7 +101,7 @@ class Conversation
     /**
      * Get locked
      *
-     * @return boolean
+     * @return bool
      */
     public function getLocked()
     {
@@ -289,8 +288,9 @@ class Conversation
 
     public function isMember(\AppBundle\Entity\User $user = null)
     {
-        return $this->members->exists(function($key, $elem) use ($user) {return $elem->getUser()->getId() === $user->getId();});
+        return $this->members->exists(function ($key, $elem) use ($user) {return $elem->getUser()->getId() === $user->getId(); });
     }
+
     /**
      * Constructor
      */

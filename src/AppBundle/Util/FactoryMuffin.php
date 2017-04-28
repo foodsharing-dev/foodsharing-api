@@ -1,13 +1,15 @@
 <?php
+
 namespace AppBundle\Util;
 
 use League\FactoryMuffin\FactoryMuffin as fm;
 use League\FactoryMuffin\Stores\RepositoryStore;
 
-class FactoryMuffin {
+class FactoryMuffin
+{
     public static $fm = null;
 
-    function __construct($manager)
+    public function __construct($manager)
     {
         self::init();
     }

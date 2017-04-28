@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
 
 /**
-* @ORM\Entity(repositoryClass="AppBundle\Repository\StoreRepository")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\StoreRepository")
  * @ORM\Table(name="fs_betrieb")
  */
 class Store
@@ -119,6 +119,7 @@ class Store
 
     /**
      * Groups({"storeList", "storeDetail"})
+     *
      * @ORM\Column(type="smallint", name="betrieb_status_id")
      */
     private $status = self::STATUS_NO_CONTACT;
@@ -135,12 +136,14 @@ class Store
 
     /**
      * describes if the store cooperation might be used in communication towards press
+     *
      * @ORM\Column(type="boolean", name="presse")
      */
     private $nameInPressOk = false;
 
     /**
      * describes if the store would like to have foodsharing stickers in the shop
+     *
      * @ORM\Column(type="boolean", name="sticker")
      */
     private $putStickerOk = false;
@@ -161,10 +164,10 @@ class Store
      */
     private $pickupSignupAdvance = 1209600;
 
-     /**
+    /**
      * Get id
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -338,6 +341,7 @@ class Store
     {
         return $this->teamConversation;
     }
+
     /**
      * Constructor
      */
@@ -384,9 +388,10 @@ class Store
     public function isInTeam(\AppBundle\Entity\User $user)
     {
         $criteria = Criteria::create()
-            ->where(Criteria::expr()->eq("user", $user))
-            ->andWhere(Criteria::expr()->gt("status", 0));
+            ->where(Criteria::expr()->eq('user', $user))
+            ->andWhere(Criteria::expr()->gt('status', 0));
         $team = $this->getTeam();
+
         return count($this->getTeam()->matching($criteria)) > 0;
     }
 
@@ -417,7 +422,7 @@ class Store
     /**
      * Set status
      *
-     * @param integer $status
+     * @param int $status
      *
      * @return Store
      */
@@ -431,7 +436,7 @@ class Store
     /**
      * Get status
      *
-     * @return integer
+     * @return int
      */
     public function getStatus()
     {
@@ -465,7 +470,7 @@ class Store
     /**
      * Set estimatedFetchTime
      *
-     * @param integer $estimatedFetchTime
+     * @param int $estimatedFetchTime
      *
      * @return Store
      */
@@ -479,7 +484,7 @@ class Store
     /**
      * Get estimatedFetchTime
      *
-     * @return integer
+     * @return int
      */
     public function getEstimatedFetchTime()
     {
@@ -489,7 +494,7 @@ class Store
     /**
      * Set conviction
      *
-     * @param integer $conviction
+     * @param int $conviction
      *
      * @return Store
      */
@@ -503,7 +508,7 @@ class Store
     /**
      * Get conviction
      *
-     * @return integer
+     * @return int
      */
     public function getConviction()
     {
@@ -513,7 +518,7 @@ class Store
     /**
      * Set nameInPressOk
      *
-     * @param boolean $nameInPressOk
+     * @param bool $nameInPressOk
      *
      * @return Store
      */
@@ -527,7 +532,7 @@ class Store
     /**
      * Get nameInPressOk
      *
-     * @return boolean
+     * @return bool
      */
     public function getNameInPressOk()
     {
@@ -537,7 +542,7 @@ class Store
     /**
      * Set putStickerOk
      *
-     * @param boolean $putStickerOk
+     * @param bool $putStickerOk
      *
      * @return Store
      */
@@ -551,7 +556,7 @@ class Store
     /**
      * Get putStickerOk
      *
-     * @return boolean
+     * @return bool
      */
     public function getPutStickerOk()
     {
@@ -609,7 +614,7 @@ class Store
     /**
      * Set teamStatus
      *
-     * @param integer $teamStatus
+     * @param int $teamStatus
      *
      * @return Store
      */
@@ -623,7 +628,7 @@ class Store
     /**
      * Get teamStatus
      *
-     * @return integer
+     * @return int
      */
     public function getTeamStatus()
     {
@@ -633,7 +638,7 @@ class Store
     /**
      * Set pickupSignupAdvance
      *
-     * @param integer $pickupSignupAdvance
+     * @param int $pickupSignupAdvance
      *
      * @return Store
      */
@@ -647,7 +652,7 @@ class Store
     /**
      * Get pickupSignupAdvance
      *
-     * @return integer
+     * @return int
      */
     public function getPickupSignupAdvance()
     {

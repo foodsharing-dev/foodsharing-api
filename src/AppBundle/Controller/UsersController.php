@@ -12,6 +12,7 @@ class UsersController extends FOSRestController
 {
     /**
      * Show details on a user
+     *
      * @ApiDoc()
      * @View(statusCode=200, serializerGroups={"profile"})
      * @Get("/api/v1/users/{id}")

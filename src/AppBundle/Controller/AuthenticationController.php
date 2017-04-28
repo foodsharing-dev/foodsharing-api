@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Controller;
 
 use FOS\RestBundle\Controller\FOSRestController;
@@ -6,7 +7,6 @@ use FOS\RestBundle\Controller\Annotations\Post;
 use FOS\RestBundle\Controller\Annotations\Get;
 use FOS\RestBundle\Controller\Annotations\Delete;
 use FOS\RestBundle\Controller\Annotations\View;
-use JMS\Serializer\SerializationContext;
 use Nelmio\ApiDocBundle\Annotation\ApiDoc;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -40,8 +40,8 @@ class AuthenticationController extends FOSRestController
      */
     public function getAction(UserInterface $user = null)
     {
-        if(!$this->isGranted('ROLE_USER')) {
-            throw New NotFoundHttpException();
+        if (!$this->isGranted('ROLE_USER')) {
+            throw new NotFoundHttpException();
         }
 
         return ['user' => $user];
@@ -58,8 +58,9 @@ class AuthenticationController extends FOSRestController
         /* Explicit logout as firewall component does not support HTTP method filtering yet.
           TODO: Add no cookie clearing support yet
         */
-        $this->get("session")->invalidate();
-        $this->get("security.token_storage")->setToken(null);
+        $this->get('session')->invalidate();
+        $this->get('security.token_storage')->setToken(null);
+
         return ['message' => 'You are now logged out!'];
     }
 }

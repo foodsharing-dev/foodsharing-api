@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Helper;
 
 // here you can define custom actions
@@ -6,5 +7,4 @@ namespace AppBundle\Helper;
 
 class Unit extends \Codeception\Module
 {
-
 }

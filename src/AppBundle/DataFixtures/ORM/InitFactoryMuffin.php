@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
@@ -17,5 +18,4 @@ class InitFactoryMuffin implements FixtureInterface, OrderedFixtureInterface
     {
         return 0;
     }
-
 }

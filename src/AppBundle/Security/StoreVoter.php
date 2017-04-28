@@ -1,4 +1,5 @@
 <?php
+
 namespace AppBundle\Security;
 
 use AppBundle\Entity\Store;

@@ -1,8 +1,10 @@
 <?php
+
 namespace AppBundle;
 
 /**
  * Inherited Methods
+ *
  * @method void wantToTest($text)
  * @method void wantTo($text)
  * @method void execute($callable)
@@ -15,12 +17,12 @@ namespace AppBundle;
  * @method \Codeception\Lib\Friend haveFriend($name, $actorClass = NULL)
  *
  * @SuppressWarnings(PHPMD)
-*/
+ */
 class UnitTester extends \Codeception\Actor
 {
     use _generated\UnitTesterActions;
 
-   /**
+   /*
     * Define custom actions here
     */
 }
