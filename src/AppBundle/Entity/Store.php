@@ -118,7 +118,7 @@ class Store
     private $team;
 
     /**
-     * Groups({"storeList", "storeDetail"})
+     * @Groups({"storeList", "storeDetail"})
      * @ORM\Column(type="smallint", name="betrieb_status_id")
      */
     private $status = self::STATUS_NO_CONTACT;
