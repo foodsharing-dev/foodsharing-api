@@ -2,6 +2,7 @@
 
 namespace AppBundle\Entity;
 
+use JMS\Serializer\Annotation as Serializer;
 use JMS\Serializer\Annotation\Groups;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\Criteria;
@@ -75,15 +76,27 @@ class Store
 
     /**
      * @Groups({"storeList", "storeDetail"})
-     * @ORM\Column(type="string", length=120, name="str")
+     * @ORM\Column(type="string", length=120, name="str", nullable=true)
      */
     private $street;
 
     /**
      * @Groups({"storeList", "storeDetail"})
-     * @ORM\Column(type="string", length=20, name="hsnr")
+     * @ORM\Column(type="string", length=20, name="hsnr", nullable=true)
      */
     private $streetNumber;
+
+    /**
+     * @Groups({"storeList", "storeDetail"})
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $lat;
+
+    /**
+     * @Groups({"storeList", "storeDetail"})
+     * @ORM\Column(type="string", length=20, nullable=true)
+     */
+    private $lon;
 
     /**
      * @Groups({"storeDetail"})
@@ -154,7 +167,7 @@ class Store
     /**
      * @ORM\Column(type="smallint", name="team_status")
      */
-    private $teamStatus = self::TEAM_STATUS_FULL;
+    private $teamStatus = self::TEAM_STATUS_OPEN;
 
     /**
      * @ORM\Column(type="integer", options={"unsigned": true}, name="prefetchtime")
